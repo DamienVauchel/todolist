@@ -10,6 +10,9 @@ class SecurityController extends Controller
 {
     /**
      * @Route("/login", name="login")
+     *
+     * @param Request $request
+     * @return mixed
      */
     public function loginAction(Request $request)
     {
