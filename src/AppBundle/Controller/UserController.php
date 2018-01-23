@@ -49,6 +49,7 @@ class UserController extends Controller
      */
     public function editAction(User $user, Request $request)
     {
+        $user->setRoles(null);
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
