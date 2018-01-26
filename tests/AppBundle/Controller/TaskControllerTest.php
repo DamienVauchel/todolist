@@ -109,6 +109,9 @@ class TaskControllerTest extends WebTestCase
 
         $isDone = $this->task->getIsDone();
 
+        $statusCode = $this->client->getResponse()->getStatusCode();
+        $this->assertEquals(302, $statusCode);
+
         $crawler = $this->client->followRedirect();
         $response = $this->client->getResponse();
         $statusCode = $response->getStatusCode();
@@ -132,6 +135,9 @@ class TaskControllerTest extends WebTestCase
 
         $isDone = $this->task->getIsDone();
 
+        $statusCode = $this->client->getResponse()->getStatusCode();
+        $this->assertEquals(302, $statusCode);
+
         $crawler = $this->client->followRedirect();
         $response = $this->client->getResponse();
         $statusCode = $response->getStatusCode();
@@ -154,6 +160,9 @@ class TaskControllerTest extends WebTestCase
 
         $title = $this->task->getTitle();
 
+        $statusCode = $this->client->getResponse()->getStatusCode();
+        $this->assertEquals(302, $statusCode);
+
         $crawler = $this->client->followRedirect();
         $response = $this->client->getResponse();
         $statusCode = $response->getStatusCode();
@@ -173,6 +182,9 @@ class TaskControllerTest extends WebTestCase
 
         $this->task->setUser($this->authUser);
         $this->client->request('GET', '/tasks/'.$id.'/delete');
+
+        $statusCode = $this->client->getResponse()->getStatusCode();
+        $this->assertEquals(302, $statusCode);
 
         $crawler = $this->client->followRedirect();
         $response = $this->client->getResponse();

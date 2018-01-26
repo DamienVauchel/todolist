@@ -90,5 +90,12 @@ class DefaultControllerTest extends WebTestCase
 
         $statusCode = $this->client->getResponse()->getStatusCode();
         $this->assertEquals(302, $statusCode);
+
+        $crawler = $this->client->followRedirect();
+        $response = $this->client->getResponse();
+        $statusCode = $response->getStatusCode();
+
+        $this->assertEquals(200, $statusCode);
+        $this->assertContains('Connexion', $crawler->filter('h3')->text());
     }
 }
