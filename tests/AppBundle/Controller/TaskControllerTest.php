@@ -229,6 +229,30 @@ class TaskControllerTest extends WebTestCase
         $this->assertContains('Superbe! La tâche a été bien été ajoutée.', $crawler->filter('div.alert.alert-success')->text());
     }
 
+    /**
+     * Test if task is well modified by the edit form
+     */
+    public function testUpdateTask()
+    {
+        $this->addTestFixtures();
+        $this->logInAsUser();
+        $id = $this->task->getId();
+
+        $crawler = $this->client->request('GET', '/tasks/'.$id.'/edit');
+
+        $form = $crawler->selectButton('Modifier')->form();
+        $form['task[title]'] = 'Titre test';
+        $form['task[content]'] = 'Contenu de test pour la création d\'une tâche';
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+        $response = $this->client->getResponse();
+        $statusCode = $response->getStatusCode();
+
+        $this->assertEquals(200, $statusCode);
+        $this->assertContains('Superbe! La tâche a bien été modifiée.', $crawler->filter('div.alert.alert-success')->text());
+    }
+
     protected function tearDown()
     {
         $this->em->rollback();

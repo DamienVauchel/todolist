@@ -5,6 +5,7 @@ namespace Tests\AppBundle\Controller;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserControllerTest extends WebTestCase
@@ -137,4 +138,28 @@ class UserControllerTest extends WebTestCase
         $this->assertContains($this->user2->getUsername(), $responseContent);
     }
 
+//    /**
+//     * Test if user is well added by the add form
+//     */
+//    public function testCreateUser()
+//    {
+//        $this->logInAsAdmin();
+//        $crawler = $this->client->request('GET', '/users/create');
+//
+//        $form = $crawler->selectButton('Ajouter')->form();
+//        $form['user[username]'] = 'userAddTest';
+//        $form['user[password][first]'] = '1234';
+//        $form['user[password][second]'] = '1234';
+//        $form['user[email]'] = 'test@test.com';
+//        $form['user[roles]'] = 'ROLE_USER';
+//
+//        $this->client->submit($form);
+//
+//        $crawler = $this->client->followRedirects();
+//        $response = $this->client->getResponse();
+//        $statusCode = $response->getStatusCode();
+//
+//        $this->assertEquals(200, $statusCode);
+//        $this->assertContains('Superbe! L\'utilisateur a bien été ajouté.', $crawler->filter('div.alert.alert-success')->text());
+//    }
 }
