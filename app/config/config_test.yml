@@ -14,3 +14,13 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+security:
+    firewalls:
+        main:
+            http_basic: ~
+
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        memory: true
