@@ -208,6 +208,27 @@ class TaskControllerTest extends WebTestCase
         $this->assertContains('Superbe! La tâche a bien été supprimée.', $crawler->filter('div.alert.alert-success')->text());
     }
 
+    /**
+     * Test if task is well added by the add form
+     */
+    public function testCreateTask()
+    {
+        $this->logInAsUser();
+        $crawler = $this->client->request('GET', '/tasks/create');
+
+        $form = $crawler->selectButton('Ajouter')->form();
+        $form['task[title]'] = 'Titre test';
+        $form['task[content]'] = 'Contenu de test pour la création d\'une tâche';
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+        $response = $this->client->getResponse();
+        $statusCode = $response->getStatusCode();
+
+        $this->assertEquals(200, $statusCode);
+        $this->assertContains('Superbe! La tâche a été bien été ajoutée.', $crawler->filter('div.alert.alert-success')->text());
+    }
+
     protected function tearDown()
     {
         $this->em->rollback();
