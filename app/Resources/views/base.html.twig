@@ -16,6 +16,12 @@
         <!-- Custom CSS -->
         <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
 
+        <!-- ############################### FONT AWESOME ########################################### -->
+        <script src="https://use.fontawesome.com/290e2ca6fa.js"></script>
+
+        <!-- ############################### GOOGLE FONTS ########################################### -->
+        <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -28,27 +34,37 @@
         <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">To Do List app</a>
-
-                    <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms" />
+                    <a class="navbar-brand" href="{{ path('homepage') }}" style="color: #000!important; font-size: 2em; font-family: 'Rubik', sans-serif">To Do List app</a>
                 </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{ path('homepage') }}" class="btn" style="color: #000!important;"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <li>
+                                <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('user_list') }}" class="btn btn-info">Gérer les utilisateurs</a>
+                            </li>
+                        {% endif %}
+                        <li>
+                            <a href="{{ path('logout') }}" class="btn btn-danger">Se déconnecter</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            {% if not app.user and 'login' != app.request.attributes.get('_route') %}
+                                <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
+                            {% endif %}
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </nav>
 
         <!-- Page Content -->
         <div class="container">
-            <div class="row">
-                <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
-
-                {% if app.user %}
-                <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
-                {% endif %}
-
-                {% if not app.user and 'login' != app.request.attributes.get('_route') %}
-                <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
-                {% endif %}
-            </div>
-
             <div class="row">
                 <div class="col-md-12">
                     {% for flash_message in app.session.flashBag.get('success') %}
@@ -64,7 +80,7 @@
                     {% endfor %}
 
                     {% block header_title %}{% endblock %}
-                    {% block header_img %}<img class="slide-image" src="{{ asset('img/todolist_homepage.jpg') }}" alt="todo list">{% endblock %}
+                    {% block header_img %}{% endblock %}
                 </div>
             </div>
 
@@ -84,7 +100,7 @@
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p class="pull-right">Copyright &copy; OpenClassrooms</p>
+                        <p class="pull-right">Copyright &copy; OpenClassrooms <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms" /></p>
                     </div>
                 </div>
             </footer>
