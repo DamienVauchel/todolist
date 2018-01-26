@@ -97,6 +97,20 @@ class TaskControllerTest extends WebTestCase
     }
 
     /**
+     * Test if Admin can access his buttons and homepage
+     */
+    public function testRedirectedIsNotLogged()
+    {
+        $this->addTestFixtures();
+        $this->client->request('GET', '/tasks');
+
+        $response = $this->client->getResponse();
+
+        $statusCode = $response->getStatusCode();
+        $this->assertEquals(302, $statusCode);
+    }
+
+    /**
      * Test if task is well marked as done if undone
      */
     public function testIsMarkedDoneIfUndone()
