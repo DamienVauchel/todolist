@@ -15,6 +15,8 @@ class TaskControllerTest extends WebTestCase
     private $em;
     private $task;
     private $user;
+    private $authUser;
+    private $token;
 
     protected function setUp()
     {
@@ -35,8 +37,8 @@ class TaskControllerTest extends WebTestCase
 
         $firewallContext = 'main';
 
-        $token = new UsernamePasswordToken('user', null, $firewallContext, array('ROLE_USER'));
-        $session->set('_security_'.$firewallContext, serialize($token));
+        $this->token = new UsernamePasswordToken('authUser', null, $firewallContext, array('ROLE_USER'));
+        $session->set('_security_'.$firewallContext, serialize($this->token));
         $session->save();
 
         $cookie = new Cookie($session->getName(), $session->getId());
@@ -55,6 +57,15 @@ class TaskControllerTest extends WebTestCase
         $this->user->setRoles('ROLE_USER');
 
         $this->em->persist($this->user);
+        $this->em->flush();
+
+        $this->authUser = new User();
+        $this->authUser->setUsername('authUser');
+        $this->authUser->setPassword('1234');
+        $this->authUser->setEmail('auth@example.com');
+        $this->authUser->setRoles('ROLE_USER');
+
+        $this->em->persist($this->authUser);
         $this->em->flush();
 
         $this->task = new Task();
@@ -128,6 +139,47 @@ class TaskControllerTest extends WebTestCase
         $this->assertEquals(200, $statusCode);
         $this->assertEquals(false, $isDone);
         $this->assertContains('Superbe! La tâche '.$title.' a bien été marquée comme à faire.', $crawler->filter('div.alert.alert-success')->text());
+    }
+
+    /**
+     * Test if task is not deleted when authenticated used isn't its author
+     */
+    public function testDeleteIfNotAuthor()
+    {
+        $this->addTestFixtures();
+        $id = $this->task->getId();
+        $this->logInAsUser();
+
+        $this->client->request('GET', '/tasks/'.$id.'/delete');
+
+        $title = $this->task->getTitle();
+
+        $crawler = $this->client->followRedirect();
+        $response = $this->client->getResponse();
+        $statusCode = $response->getStatusCode();
+
+        $this->assertEquals(200, $statusCode);
+        $this->assertContains('Oops! La tâche '.$title.' n\'a pas été supprimée car vous ne l\'avez pas écrite.', $crawler->filter('div.alert.alert-danger')->text());
+    }
+
+    /**
+     * Test if task is well deleted when authenticated used is its author
+     */
+    public function testDeleteIfAuthor()
+    {
+        $this->addTestFixtures();
+        $id = $this->task->getId();
+        $this->logInAsUser();
+
+        $this->task->setUser($this->authUser);
+        $this->client->request('GET', '/tasks/'.$id.'/delete');
+
+        $crawler = $this->client->followRedirect();
+        $response = $this->client->getResponse();
+        $statusCode = $response->getStatusCode();
+
+        $this->assertEquals(200, $statusCode);
+        $this->assertContains('Superbe! La tâche a bien été supprimée.', $crawler->filter('div.alert.alert-success')->text());
     }
 
     protected function tearDown()
