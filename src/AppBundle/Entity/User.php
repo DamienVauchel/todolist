@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -38,6 +39,12 @@ class User implements UserInterface
      * @Assert\Email(message="Le format de l'adresse n'est pas correcte.")
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="array")
+     * @Assert\NotBlank(message="Vous devez choisir un rôle.")
+     */
+    private $roles;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="user", cascade={"remove"})
@@ -82,11 +89,6 @@ class User implements UserInterface
     public function setEmail($email)
     {
         $this->email = $email;
-    }
-
-    public function getRoles()
-    {
-        return array('ROLE_USER');
     }
 
     public function eraseCredentials()
@@ -134,5 +136,17 @@ class User implements UserInterface
     public function getTasks()
     {
         return $this->tasks;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getRoles()
+    {
+            return $this->roles;
     }
 }

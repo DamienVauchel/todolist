@@ -27,3 +27,7 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/users, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }
+
+    role_hierarchy:
+        ROLE_USER:
+        ROLE_ADMIN:           ROLE_USER
