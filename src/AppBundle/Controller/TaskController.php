@@ -96,9 +96,12 @@ class TaskController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $authUser = $this->get('user_finder')->findUser();
-        $taskUser = $task->getUser();
+        $authUserRole = $authUser->getRoles();
 
-        if ($taskUser->getUsername() === 'anonyme' && $authUser->getRoles() === 'ROLE_ADMIN')
+        $taskUser = $task->getUser();
+        $taskUserUsername = $taskUser->getUsername();
+
+        if ($taskUserUsername == 'anonyme' && $authUserRole == array("ROLE_ADMIN"))
         {
             $em->remove($task);
             $em->flush();
