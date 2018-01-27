@@ -4,58 +4,13 @@ namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\Task;
 use AppBundle\Entity\User;
-use Doctrine\ORM\Tools\SchemaTool;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Tests\AppBundle\Framework\WebTestCase;
 
 class TaskControllerTest extends WebTestCase
 {
-    private $client;
-    private $container;
-    private $em;
     private $task;
     private $user;
     private $authUser;
-    private $token;
-
-    protected function setUp()
-    {
-        $this->client = static::createClient();
-        $this->container = $this->client->getContainer();
-        $this->em = $this->container->get('doctrine')->getManager();
-
-        static $metadatas = null;
-        if (is_null($metadatas))
-        {
-            $metadatas = $this->em->getMetadataFactory()->getAllMetadata();
-        }
-
-        $schemaTool = new SchemaTool($this->em);
-        $schemaTool->dropDatabase();
-
-        if (!empty($metadatas))
-        {
-            $schemaTool->createSchema($metadatas);
-        }
-    }
-
-    /**
-     * Simulate a login as an user (with ROLE_USER)
-     */
-    private function logInAsUser()
-    {
-        $session = $this->client->getContainer()->get('session');
-
-        $firewallContext = 'main';
-
-        $this->token = new UsernamePasswordToken('authUser', null, $firewallContext, array('ROLE_USER'));
-        $session->set('_security_'.$firewallContext, serialize($this->token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
-    }
 
     /**
      * Add example fixtures
@@ -263,11 +218,5 @@ class TaskControllerTest extends WebTestCase
 
         $this->assertEquals(200, $statusCode);
         $this->assertContains('Superbe! La tâche a bien été modifiée.', $crawler->filter('div.alert.alert-success')->text());
-    }
-
-    protected function tearDown()
-    {
-        $this->em->close();
-        $this->em = null;
     }
 }

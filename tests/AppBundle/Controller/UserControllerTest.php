@@ -3,73 +3,12 @@
 namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\User;
-use Doctrine\ORM\Tools\SchemaTool;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Tests\AppBundle\Framework\WebTestCase;
 
 class UserControllerTest extends WebTestCase
 {
-    private $client;
-    private $container;
-    private $em;
     private $user1;
     private $user2;
-
-    protected function setUp()
-    {
-        $this->client = static::createClient();
-        $this->container = $this->client->getContainer();
-        $this->em = $this->container->get('doctrine')->getManager();
-
-        static $metadatas = null;
-        if (is_null($metadatas))
-        {
-            $metadatas = $this->em->getMetadataFactory()->getAllMetadata();
-        }
-
-        $schemaTool = new SchemaTool($this->em);
-        $schemaTool->dropDatabase();
-
-        if (!empty($metadatas))
-        {
-            $schemaTool->createSchema($metadatas);
-        }
-    }
-
-    /**
-     * Simulate a login as an admin (with ROLE_ADMIN)
-     */
-    private function logInAsAdmin()
-    {
-        $session = $this->client->getContainer()->get('session');
-
-        $firewallContext = 'main';
-
-        $token = new UsernamePasswordToken('admin', null, $firewallContext, array('ROLE_ADMIN'));
-        $session->set('_security_'.$firewallContext, serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
-    }
-
-    /**
-     * Simulate a login as an user (with ROLE_USER)
-     */
-    private function logInAsUser()
-    {
-        $session = $this->client->getContainer()->get('session');
-
-        $firewallContext = 'main';
-
-        $token = new UsernamePasswordToken('authUser', null, $firewallContext, array('ROLE_USER'));
-        $session->set('_security_'.$firewallContext, serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
-    }
 
     /**
      * Add example fixtures
@@ -199,11 +138,5 @@ class UserControllerTest extends WebTestCase
 
         $this->assertEquals(200, $statusCode);
         $this->assertContains('Superbe! L\'utilisateur a bien été modifié', $crawler->filter('div.alert.alert-success')->text());
-    }
-
-    protected function tearDown()
-    {
-        $this->em->close();
-        $this->em = null;
     }
 }

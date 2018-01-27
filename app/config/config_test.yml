@@ -20,9 +20,6 @@ security:
         main:
             http_basic: ~
 
-#parameters:
-#    database_name: todolist_test
-
 doctrine:
     dbal:
         driver: pdo_sqlite
