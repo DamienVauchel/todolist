@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="39675f91-8beb-4f26-96c8-9c24d4efd0d9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" />
+      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,45 +29,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TaskController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="104" column="9" lean-forward="false" selection-start-line="104" selection-start-column="9" selection-end-line="104" selection-end-column="9" />
-              <folding />
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="360">
+                <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/UserController.php">
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+            <state relative-caret-position="-248">
+              <caret line="77" column="40" lean-forward="false" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FixturesCommand.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/FixturesCommand.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskUserCommand.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/TaskUserCommand.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="22" column="76" lean-forward="false" selection-start-line="22" selection-start-column="76" selection-end-line="22" selection-end-column="76" />
-              <folding>
-                <element signature="e#37#63#0#PHP" expanded="true" />
-                <element signature="e#706#722#1#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -82,7 +62,6 @@
       <list>
         <option value="$PROJECT_DIR$/phpinfo.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/AppBundle/Services/FindAuthUser.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/app/config/services.yml" />
@@ -118,6 +97,7 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Command/FixturesCommand.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/user/list.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -287,6 +267,24 @@
             <path>
               <item name="www" type="b2602c69:ProjectViewProjectNode" />
               <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="www" type="b2602c69:ProjectViewProjectNode" />
+              <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="www" type="b2602c69:ProjectViewProjectNode" />
+              <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="www" type="b2602c69:ProjectViewProjectNode" />
+              <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -372,7 +370,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85479000" />
+    <option name="totallyTimeSpent" value="86699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -463,16 +461,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/phpinfo.php" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="20">
-            <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Services/FindAuthUser.php" />
     <entry file="file://$PROJECT_DIR$/index.php" />
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/UserRepository.php">
@@ -505,13 +493,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Pasted Image- Jan 24, 2018 - 9-36-24am.png" />
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="620">
@@ -626,13 +607,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="3" column="51" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
-          <caret line="77" column="40" lean-forward="false" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -775,9 +749,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="104" column="9" lean-forward="false" selection-start-line="104" selection-start-column="9" selection-end-line="104" selection-end-column="9" />
+        <state relative-caret-position="432">
+          <caret line="126" column="5" lean-forward="false" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-248">
+          <caret line="77" column="40" lean-forward="false" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="360">
+            <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
