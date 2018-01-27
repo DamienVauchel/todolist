@@ -4,6 +4,7 @@ namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\Task;
 use AppBundle\Entity\User;
+use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -24,8 +25,19 @@ class TaskControllerTest extends WebTestCase
         $this->container = $this->client->getContainer();
         $this->em = $this->container->get('doctrine')->getManager();
 
-        $this->em->beginTransaction();
-        $this->em->getConnection()->setAutoCommit(false);
+        static $metadatas = null;
+        if (is_null($metadatas))
+        {
+            $metadatas = $this->em->getMetadataFactory()->getAllMetadata();
+        }
+
+        $schemaTool = new SchemaTool($this->em);
+        $schemaTool->dropDatabase();
+
+        if (!empty($metadatas))
+        {
+            $schemaTool->createSchema($metadatas);
+        }
     }
 
     /**
@@ -219,7 +231,7 @@ class TaskControllerTest extends WebTestCase
         $form = $crawler->selectButton('Ajouter')->form();
         $form['task[title]'] = 'Titre test';
         $form['task[content]'] = 'Contenu de test pour la création d\'une tâche';
-        $this->client->submit($form);
+        $this->task = $this->client->submit($form);
 
         $crawler = $this->client->followRedirect();
         $response = $this->client->getResponse();
@@ -241,7 +253,7 @@ class TaskControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', '/tasks/'.$id.'/edit');
 
         $form = $crawler->selectButton('Modifier')->form();
-        $form['task[title]'] = 'Titre test';
+        $form['task[title]'] = 'Titre';
         $form['task[content]'] = 'Contenu de test pour la création d\'une tâche';
         $this->client->submit($form);
 
@@ -255,8 +267,6 @@ class TaskControllerTest extends WebTestCase
 
     protected function tearDown()
     {
-        $this->em->rollback();
-
         $this->em->close();
         $this->em = null;
     }

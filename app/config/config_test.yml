@@ -20,10 +20,5 @@ security:
         main:
             http_basic: ~
 
-doctrine:
-    dbal:
-        connections:
-            default:
-                driver: pdo_sqlite
-#                memory: true
-                path: '%kernel.project_dir%/var/data.sqlite'
+parameters:
+    database_name: todolist_test

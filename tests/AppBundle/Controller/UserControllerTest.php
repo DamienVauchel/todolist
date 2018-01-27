@@ -3,9 +3,9 @@
 namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserControllerTest extends WebTestCase
@@ -22,8 +22,19 @@ class UserControllerTest extends WebTestCase
         $this->container = $this->client->getContainer();
         $this->em = $this->container->get('doctrine')->getManager();
 
-        $this->em->beginTransaction();
-        $this->em->getConnection()->setAutoCommit(false);
+        static $metadatas = null;
+        if (is_null($metadatas))
+        {
+            $metadatas = $this->em->getMetadataFactory()->getAllMetadata();
+        }
+
+        $schemaTool = new SchemaTool($this->em);
+        $schemaTool->dropDatabase();
+
+        if (!empty($metadatas))
+        {
+            $schemaTool->createSchema($metadatas);
+        }
     }
 
     /**
@@ -138,28 +149,61 @@ class UserControllerTest extends WebTestCase
         $this->assertContains($this->user2->getUsername(), $responseContent);
     }
 
-//    /**
-//     * Test if user is well added by the add form
-//     */
-//    public function testCreateUser()
-//    {
-//        $this->logInAsAdmin();
-//        $crawler = $this->client->request('GET', '/users/create');
-//
-//        $form = $crawler->selectButton('Ajouter')->form();
-//        $form['user[username]'] = 'userAddTest';
-//        $form['user[password][first]'] = '1234';
-//        $form['user[password][second]'] = '1234';
-//        $form['user[email]'] = 'test@test.com';
-//        $form['user[roles]'] = 'ROLE_USER';
-//
-//        $this->client->submit($form);
-//
-//        $crawler = $this->client->followRedirects();
-//        $response = $this->client->getResponse();
-//        $statusCode = $response->getStatusCode();
-//
-//        $this->assertEquals(200, $statusCode);
-//        $this->assertContains('Superbe! L\'utilisateur a bien été ajouté.', $crawler->filter('div.alert.alert-success')->text());
-//    }
+    /**
+     * Test if user is well added by the add form
+     */
+    public function testCreateUser()
+    {
+        $this->logInAsAdmin();
+        $crawler = $this->client->request('GET', '/users/create');
+
+        $form = $crawler->selectButton('Ajouter')->form();
+        $form['user[username]'] = 'userAddTest';
+        $form['user[password][first]'] = '1234';
+        $form['user[password][second]'] = '1234';
+        $form['user[email]'] = 'test@test.com';
+        $form['user[roles]'] = 'ROLE_USER';
+
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+        $response = $this->client->getResponse();
+        $statusCode = $response->getStatusCode();
+
+        $this->assertEquals(200, $statusCode);
+        $this->assertContains('Superbe! L\'utilisateur a bien été ajouté.', $crawler->filter('div.alert.alert-success')->text());
+    }
+
+    /**
+     * Test if user is well modified by the edit form
+     */
+    public function testUpdateUser()
+    {
+        $this->addTestFixtures();
+        $this->logInAsAdmin();
+        $id = $this->user1->getId();
+
+        $crawler = $this->client->request('GET', '/users/'.$id.'/edit');
+
+        $form = $crawler->selectButton('Modifier')->form();
+        $form['user[username]'] = 'userAddTest';
+        $form['user[password][first]'] = '1234';
+        $form['user[password][second]'] = '1234';
+        $form['user[email]'] = 'test@test.com';
+        $form['user[roles]'] = 'ROLE_USER';
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+        $response = $this->client->getResponse();
+        $statusCode = $response->getStatusCode();
+
+        $this->assertEquals(200, $statusCode);
+        $this->assertContains('Superbe! L\'utilisateur a bien été modifié', $crawler->filter('div.alert.alert-success')->text());
+    }
+
+    protected function tearDown()
+    {
+        $this->em->close();
+        $this->em = null;
+    }
 }
