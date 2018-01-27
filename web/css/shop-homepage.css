@@ -52,7 +52,7 @@ body {
 .btn:hover
 {
     background: #fff !important;
-    color: #000 !important;
+    color: #000;
 }
 
 footer {

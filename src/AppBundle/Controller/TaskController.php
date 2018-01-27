@@ -98,6 +98,16 @@ class TaskController extends Controller
         $authUser = $this->get('user_finder')->findUser();
         $taskUser = $task->getUser();
 
+        if ($taskUser->getUsername() === 'anonyme' && $authUser->getRoles() === 'ROLE_ADMIN')
+        {
+            $em->remove($task);
+            $em->flush();
+
+            $this->addFlash('success', 'La tâche a bien été supprimée.');
+
+            return $this->redirectToRoute('task_list');
+        }
+
         if ($authUser == $taskUser)
         {
             $em->remove($task);
