@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for C:\Apache24\htdocs\todolist\src\AppBundle/Entity</title>
+  <title>Dashboard for C:\Apache24\htdocs\todolist\src\AppBundle/Command</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../.css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="../.css/nv.d3.min.css" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
      <div class="col-md-12">
       <ol class="breadcrumb">
         <li><a href="../index.html">C:\Apache24\htdocs\todolist\src\AppBundle</a></li>
-        <li><a href="index.html">Entity</a></li>
+        <li><a href="index.html">Command</a></li>
         <li class="active">(Dashboard)</li>
 
       </ol>
@@ -59,8 +59,8 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="User.php.html#15">AppBundle\Entity\User</a></td><td class="text-right">76%</td></tr>
-       <tr><td><a href="Task.php.html#12">AppBundle\Entity\Task</a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="FixturesCommand.php.html#12">AppBundle\Command\FixturesCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TaskUserCommand.php.html#10">AppBundle\Command\TaskUserCommand</a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -77,6 +77,8 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="FixturesCommand.php.html#12">AppBundle\Command\FixturesCommand</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="TaskUserCommand.php.html#10">AppBundle\Command\TaskUserCommand</a></td><td class="text-right">20</td></tr>
 
        </tbody>
       </table>
@@ -114,12 +116,10 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="Task.php.html#59"><abbr title="AppBundle\Entity\Task::getCreatedAt">getCreatedAt</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Task.php.html#64"><abbr title="AppBundle\Entity\Task::setCreatedAt">setCreatedAt</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="User.php.html#93"><abbr title="AppBundle\Entity\User::eraseCredentials">eraseCredentials</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="User.php.html#111"><abbr title="AppBundle\Entity\User::addTask">addTask</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="User.php.html#125"><abbr title="AppBundle\Entity\User::removeTask">removeTask</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="User.php.html#135"><abbr title="AppBundle\Entity\User::getTasks">getTasks</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FixturesCommand.php.html#14"><abbr title="AppBundle\Command\FixturesCommand::configure">configure</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FixturesCommand.php.html#21"><abbr title="AppBundle\Command\FixturesCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TaskUserCommand.php.html#12"><abbr title="AppBundle\Command\TaskUserCommand::configure">configure</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TaskUserCommand.php.html#19"><abbr title="AppBundle\Command\TaskUserCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -136,6 +136,8 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="FixturesCommand.php.html#21"><abbr title="AppBundle\Command\FixturesCommand::execute">execute</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TaskUserCommand.php.html#19"><abbr title="AppBundle\Command\TaskUserCommand::execute">execute</abbr></a></td><td class="text-right">12</td></tr>
 
        </tbody>
       </table>
@@ -166,7 +168,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,1,1,0,0], "Class Coverage"))
+      .datum(getCoverageDistributionData([2,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -184,7 +186,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([6,0,0,0,0,0,0,0,0,0,0,23], "Method Coverage"))
+      .datum(getCoverageDistributionData([4,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -234,7 +236,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[86.36363636363636,14,"<a href=\"Task.php.html#12\">AppBundle\\Entity\\Task<\/a>"],[76.19047619047619,15,"<a href=\"User.php.html#15\">AppBundle\\Entity\\User<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[0,4,"<a href=\"FixturesCommand.php.html#12\">AppBundle\\Command\\FixturesCommand<\/a>"],[0,4,"<a href=\"TaskUserCommand.php.html#10\">AppBundle\\Command\\TaskUserCommand<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -258,7 +260,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"Task.php.html#48\">AppBundle\\Entity\\Task::__construct<\/a>"],[100,1,"<a href=\"Task.php.html#54\">AppBundle\\Entity\\Task::getId<\/a>"],[0,1,"<a href=\"Task.php.html#59\">AppBundle\\Entity\\Task::getCreatedAt<\/a>"],[0,1,"<a href=\"Task.php.html#64\">AppBundle\\Entity\\Task::setCreatedAt<\/a>"],[100,1,"<a href=\"Task.php.html#69\">AppBundle\\Entity\\Task::getTitle<\/a>"],[100,1,"<a href=\"Task.php.html#74\">AppBundle\\Entity\\Task::setTitle<\/a>"],[100,1,"<a href=\"Task.php.html#79\">AppBundle\\Entity\\Task::getContent<\/a>"],[100,1,"<a href=\"Task.php.html#84\">AppBundle\\Entity\\Task::setContent<\/a>"],[100,1,"<a href=\"Task.php.html#89\">AppBundle\\Entity\\Task::isDone<\/a>"],[100,1,"<a href=\"Task.php.html#94\">AppBundle\\Entity\\Task::toggle<\/a>"],[100,1,"<a href=\"Task.php.html#106\">AppBundle\\Entity\\Task::setIsDone<\/a>"],[100,1,"<a href=\"Task.php.html#118\">AppBundle\\Entity\\Task::getIsDone<\/a>"],[100,1,"<a href=\"Task.php.html#130\">AppBundle\\Entity\\Task::setUser<\/a>"],[100,1,"<a href=\"Task.php.html#142\">AppBundle\\Entity\\Task::getUser<\/a>"],[100,1,"<a href=\"User.php.html#53\">AppBundle\\Entity\\User::getId<\/a>"],[100,1,"<a href=\"User.php.html#58\">AppBundle\\Entity\\User::getUsername<\/a>"],[100,1,"<a href=\"User.php.html#63\">AppBundle\\Entity\\User::setUsername<\/a>"],[100,1,"<a href=\"User.php.html#68\">AppBundle\\Entity\\User::getSalt<\/a>"],[100,1,"<a href=\"User.php.html#73\">AppBundle\\Entity\\User::getPassword<\/a>"],[100,1,"<a href=\"User.php.html#78\">AppBundle\\Entity\\User::setPassword<\/a>"],[100,1,"<a href=\"User.php.html#83\">AppBundle\\Entity\\User::getEmail<\/a>"],[100,1,"<a href=\"User.php.html#88\">AppBundle\\Entity\\User::setEmail<\/a>"],[0,1,"<a href=\"User.php.html#93\">AppBundle\\Entity\\User::eraseCredentials<\/a>"],[100,1,"<a href=\"User.php.html#99\">AppBundle\\Entity\\User::__construct<\/a>"],[0,1,"<a href=\"User.php.html#111\">AppBundle\\Entity\\User::addTask<\/a>"],[0,1,"<a href=\"User.php.html#125\">AppBundle\\Entity\\User::removeTask<\/a>"],[0,1,"<a href=\"User.php.html#135\">AppBundle\\Entity\\User::getTasks<\/a>"],[100,1,"<a href=\"User.php.html#140\">AppBundle\\Entity\\User::setRoles<\/a>"],[100,1,"<a href=\"User.php.html#147\">AppBundle\\Entity\\User::getRoles<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[0,1,"<a href=\"FixturesCommand.php.html#14\">AppBundle\\Command\\FixturesCommand::configure<\/a>"],[0,3,"<a href=\"FixturesCommand.php.html#21\">AppBundle\\Command\\FixturesCommand::execute<\/a>"],[0,1,"<a href=\"TaskUserCommand.php.html#12\">AppBundle\\Command\\TaskUserCommand::configure<\/a>"],[0,3,"<a href=\"TaskUserCommand.php.html#19\">AppBundle\\Command\\TaskUserCommand::execute<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);
