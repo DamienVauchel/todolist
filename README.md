@@ -70,6 +70,10 @@ Download project or clone it in the htdocs or www depend of your OS
 
 And enjoy :)
 
+## How to contribute
+To contribute the project, follow the steps explained in the [HowToContribute.md](https://github.com/DamienVauchel/todolist/blob/master/HowToContribute.md) file.
+
+
 If you have any question, you can contact me
 
 Thanks!
