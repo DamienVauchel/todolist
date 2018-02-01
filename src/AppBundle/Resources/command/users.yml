@@ -2,23 +2,27 @@ user_01:
     username: "Le_grand_jd"
     email: "grand_jd@youtube.com"
     password: "1234"
-    roles: "ROLE_USER"
+    roles:
+        - "ROLE_USER"
 
 user_02:
     username: "PCroce"
     email: "p_croce@youtube.com"
     password: "1234"
-    roles: "ROLE_USER"
+    roles:
+        - "ROLE_USER"
 
 user_03:
     username: "SuperM"
     email: "super_mario@nintendo.com"
     password: "1234"
-    roles: "ROLE_USER"
+    roles:
+        - "ROLE_USER"
 
 user_04:
     username: "Batman"
     email: "batou@gotham.com"
     password: "1234"
-    roles: "ROLE_USER"
+    roles:
+        - "ROLE_USER"
 

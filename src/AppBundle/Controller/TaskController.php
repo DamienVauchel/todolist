@@ -99,29 +99,32 @@ class TaskController extends Controller
         $authUserRole = $authUser->getRoles();
 
         $taskUser = $task->getUser();
-        $taskUserUsername = $taskUser->getUsername();
-
-        if ($taskUserUsername == 'anonyme' && $authUserRole == array("ROLE_ADMIN"))
+        if (!empty($taskUser))
         {
-            $em->remove($task);
-            $em->flush();
+            $taskUserUsername = $taskUser->getUsername();
 
-            $this->addFlash('success', 'La tâche a bien été supprimée.');
+            if ($taskUserUsername == 'anonyme' && $authUserRole == array("ROLE_ADMIN"))
+            {
+                $em->remove($task);
+                $em->flush();
 
-            return $this->redirectToRoute('task_list');
+                $this->addFlash('success', 'La tâche a bien été supprimée.');
+
+                return $this->redirectToRoute('task_list');
+            }
+
+            if ($authUser == $taskUser)
+            {
+                $em->remove($task);
+                $em->flush();
+
+                $this->addFlash('success', 'La tâche a bien été supprimée.');
+
+                return $this->redirectToRoute('task_list');
+            }
         }
 
-        if ($authUser == $taskUser)
-        {
-            $em->remove($task);
-            $em->flush();
-
-            $this->addFlash('success', 'La tâche a bien été supprimée.');
-
-            return $this->redirectToRoute('task_list');
-        }
-
-        $this->addFlash('error', sprintf('La tâche %s n\'a pas été supprimée car vous ne l\'avez pas écrite.', $task->getTitle()));
+        $this->addFlash('error', sprintf('La tâche %s n\'a pas été supprimée car vous n\'en êtes pas l\'auteur.', $task->getTitle()));
 
         return $this->redirectToRoute('task_list');
     }

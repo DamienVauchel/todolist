@@ -3,3 +3,33 @@ task_01:
     content: "Contenu de la tache une"
     isDone: false
     user_id: "1"
+
+task_02:
+    title: "Tache exemple 2"
+    content: "Contenu de la tache deux"
+    isDone: false
+    user_id: null
+
+task_03:
+    title: "Tache exemple 3"
+    content: "Contenu de la tache trois"
+    isDone: true
+    user_id: "1"
+
+task_04:
+    title: "Tache exemple 4"
+    content: "Contenu de la tache quatre"
+    isDone: false
+    user_id: "1"
+
+task_05:
+    title: "Tache exemple 5"
+    content: "Contenu de la tache cinq"
+    isDone: true
+    user_id: null
+
+task_06:
+    title: "Tache exemple 6"
+    content: "Contenu de la tache six"
+    isDone: false
+    user_id: "1"

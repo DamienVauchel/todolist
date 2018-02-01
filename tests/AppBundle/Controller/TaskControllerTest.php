@@ -149,7 +149,7 @@ class TaskControllerTest extends WebTestCase
         $statusCode = $response->getStatusCode();
 
         $this->assertEquals(200, $statusCode);
-        $this->assertContains('Oops! La tâche '.$title.' n\'a pas été supprimée car vous ne l\'avez pas écrite.', $crawler->filter('div.alert.alert-danger')->text());
+        $this->assertContains('Oops! La tâche '.$title.' n\'a pas été supprimée car vous n\'en êtes pas l\'auteur.', $crawler->filter('div.alert.alert-danger')->text());
     }
 
     /**
