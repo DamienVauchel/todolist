@@ -39,6 +39,8 @@ class TaskUserCommand extends ContainerAwareCommand
             }
         }
         $entityManager->flush();
+
+        $output->writeln("Your tasks without users have been linked to 'anonyme'");
     }
 
 }
