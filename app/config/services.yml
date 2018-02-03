@@ -9,3 +9,7 @@ services:
         arguments:
             - "@security.token_storage"
             - "@doctrine.orm.entity_manager"
+
+    user_manager:
+        class: AppBundle\Manager\UserManager
+        arguments: ['@service_container']

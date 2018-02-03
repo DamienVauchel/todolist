@@ -26,7 +26,7 @@ class TaskUserCommand extends ContainerAwareCommand
         $anonymeUser->setUsername('anonyme');
         $anonymeUser->setPassword('anon');
         $anonymeUser->setEmail('anon@fixture.com');
-        $anonymeUser->setRoles('ROLE_USER');
+        $anonymeUser->setRoles(array('ROLE_USER'));
 
         $entityManager->persist($anonymeUser);
         $entityManager->flush();
