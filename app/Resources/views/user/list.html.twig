@@ -22,16 +22,14 @@
                 </thead>
                 <tbody>
                 {% for user in users %}
-                    {% if user.username != "anonyme" %}
-                        <tr>
-                            <th scope="row">{{ loop.index }}</th>
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>
-                                <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Edit</a>
-                            </td>
-                        </tr>
-                    {% endif %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Edit</a>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

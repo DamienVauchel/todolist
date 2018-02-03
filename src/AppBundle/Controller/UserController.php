@@ -11,13 +11,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class UserController extends Controller
 {
+    private $usernameToIgnore;
+
+    public function __construct($usernameToIgnore)
+    {
+        $this->usernameToIgnore = $usernameToIgnore;
+    }
+
     /**
      * @Route("/users", name="user_list")
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function listAction()
     {
-        return $this->render('user/list.html.twig', ['users' => $this->getDoctrine()->getRepository('AppBundle:User')->findAll()]);
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:User');
+
+        return $this->render('user/list.html.twig', ['users' => $repository->findAllWithout($this->usernameToIgnore)]);
     }
 
     /**
