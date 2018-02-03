@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for C:\Apache24\htdocs\todolist\src\AppBundle/Services</title>
+  <title>Dashboard for C:\Apache24\htdocs\todolist\src\AppBundle/Manager</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../.css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="../.css/nv.d3.min.css" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
      <div class="col-md-12">
       <ol class="breadcrumb">
         <li><a href="../index.html">C:\Apache24\htdocs\todolist\src\AppBundle</a></li>
-        <li><a href="index.html">Services</a></li>
+        <li><a href="index.html">Manager</a></li>
         <li class="active">(Dashboard)</li>
 
       </ol>
@@ -176,7 +176,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,2], "Method Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,4], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -226,7 +226,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,2,"<a href=\"FindUser.php.html#9\">AppBundle\\Services\\FindUser<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[100,6,"<a href=\"UserManager.php.html#9\">AppBundle\\Manager\\UserManager<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -250,7 +250,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"FindUser.php.html#14\">AppBundle\\Services\\FindUser::__construct<\/a>"],[100,1,"<a href=\"FindUser.php.html#25\">AppBundle\\Services\\FindUser::findUser<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"UserManager.php.html#14\">AppBundle\\Manager\\UserManager::__construct<\/a>"],[100,1,"<a href=\"UserManager.php.html#27\">AppBundle\\Manager\\UserManager::createAdmin<\/a>"],[100,2,"<a href=\"UserManager.php.html#44\">AppBundle\\Manager\\UserManager::save<\/a>"],[100,2,"<a href=\"UserManager.php.html#59\">AppBundle\\Manager\\UserManager::userExists<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);
