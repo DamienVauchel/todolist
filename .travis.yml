@@ -4,4 +4,6 @@ php:
 
 script:
     - composer install
+    - bin/console doctrine:database:create --env=test
+    - bin/console doctrine:schema:update --force --env=test
     - vendor/phpunit/phpunit/phpunit
