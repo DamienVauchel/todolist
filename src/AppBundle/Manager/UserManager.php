@@ -4,14 +4,14 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 class UserManager
 {
     private $entityManager;
     private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoder $passwordEncoder)
     {
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
@@ -27,11 +27,8 @@ class UserManager
     public function createAdmin($username, $password, $email)
     {
         $user = new User();
-        $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
-        $user->setUsername($username);
-        $user->setPassword($password);
-        $user->setEmail($email);
-        $user->setRoles(array("ROLE_ADMIN"));
+        $encodedPassword = $this->passwordEncoder->encodePassword($user, $password);
+        $user->initializeAdmin($username, $encodedPassword, $email);
 
         $this->save($user);
     }

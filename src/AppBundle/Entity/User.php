@@ -148,4 +148,18 @@ class User implements UserInterface
     {
         return $this->roles;
     }
+
+    public function hydrate($username, $password, $email, $roles)
+    {
+        $this->setUsername($username);
+        $this->setPassword($password);
+        $this->setEmail($email);
+        $this->setRoles($roles);
+    }
+
+    public function initializeAdmin($username, $password, $email)
+    {
+        $roles = array("ROLE_ADMIN");
+        $this->hydrate($username, $password, $email, $roles);
+    }
 }
