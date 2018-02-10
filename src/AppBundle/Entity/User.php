@@ -156,10 +156,4 @@ class User implements UserInterface
         $this->setEmail($email);
         $this->setRoles($roles);
     }
-
-    public function initializeAdmin($username, $password, $email)
-    {
-        $roles = array("ROLE_ADMIN");
-        $this->hydrate($username, $password, $email, $roles);
-    }
 }

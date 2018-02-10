@@ -28,7 +28,8 @@ class UserManager
     {
         $user = new User();
         $encodedPassword = $this->passwordEncoder->encodePassword($user, $password);
-        $user->initializeAdmin($username, $encodedPassword, $email);
+        $roles = array("ROLE_ADMIN");
+        $user->hydrate($username, $encodedPassword, $email, $roles);
 
         $this->save($user);
     }
