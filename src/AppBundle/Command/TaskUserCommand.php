@@ -31,10 +31,8 @@ class TaskUserCommand extends ContainerAwareCommand
         $entityManager->persist($anonymeUser);
         $entityManager->flush();
 
-        foreach ($tasks as $task)
-        {
-            if ($task->getUser() === null)
-            {
+        foreach ($tasks as $task) {
+            if ($task->getUser() === null) {
                 $task->setUser($anonymeUser);
             }
         }

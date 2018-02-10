@@ -77,12 +77,9 @@ class TaskController extends Controller
         $task->toggle(!$task->isDone());
         $this->getDoctrine()->getManager()->flush();
 
-        if ($task->isDone())
-        {
+        if ($task->isDone()) {
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
-        }
-        else
-        {
+        } else {
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme à faire.', $task->getTitle()));
         }
 
@@ -99,12 +96,10 @@ class TaskController extends Controller
         $authUserRole = $authUser->getRoles();
 
         $taskUser = $task->getUser();
-        if (!empty($taskUser))
-        {
+        if (!empty($taskUser)) {
             $taskUserUsername = $taskUser->getUsername();
 
-            if ($taskUserUsername == 'anonyme' && $authUserRole == array("ROLE_ADMIN"))
-            {
+            if ($taskUserUsername == 'anonyme' && $authUserRole == array("ROLE_ADMIN")) {
                 $em->remove($task);
                 $em->flush();
 
@@ -113,8 +108,7 @@ class TaskController extends Controller
                 return $this->redirectToRoute('task_list');
             }
 
-            if ($authUser == $taskUser)
-            {
+            if ($authUser == $taskUser) {
                 $em->remove($task);
                 $em->flush();
 

@@ -27,8 +27,7 @@ class FixturesCommand extends ContainerAwareCommand
         $users = Yaml::parse(file_get_contents($path->locateResource('@AppBundle/Resources/command/users.yml'), true));
         $tasks = Yaml::parse(file_get_contents($path->locateResource('@AppBundle/Resources/command/tasks.yml'), true));
 
-        foreach($users as $item)
-        {
+        foreach($users as $item) {
             $user = new User();
             $user->setUsername($item['username']);
             $user->setPassword($item['password']);
@@ -39,8 +38,7 @@ class FixturesCommand extends ContainerAwareCommand
         }
         $em->flush();
 
-        foreach($tasks as $item)
-        {
+        foreach($tasks as $item) {
             $task = new Task();
             $task->setTitle($item['title']);
             $task->setContent($item['content']);

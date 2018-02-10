@@ -2,19 +2,19 @@
 
 namespace AppBundle\Manager;
 
-
 use AppBundle\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserManager
 {
-    private $em;
-    private $container;
+    private $entityManager;
+    private $passwordEncoder;
 
-    public function __construct(Container $container)
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->container = $container;
-        $this->em = $this->container->get('doctrine')->getManager();
+        $this->entityManager = $entityManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
@@ -27,7 +27,7 @@ class UserManager
     public function createAdmin($username, $password, $email)
     {
         $user = new User();
-        $password = $this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword());
+        $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
         $user->setUsername($username);
         $user->setPassword($password);
         $user->setEmail($email);
@@ -43,10 +43,9 @@ class UserManager
      */
     public function save(User $user)
     {
-        if (!$this->userExists($user))
-        {
-            $this->em->persist($user);
-            $this->em->flush();
+        if (!$this->userExists($user)) {
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
         }
     }
 
@@ -58,7 +57,7 @@ class UserManager
      */
     public function userExists(User $user)
     {
-        $user = $this->em->getRepository(User::class)->findOneBy(array('username' => $user->getUsername()));
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(array('username' => $user->getUsername()));
         return isset($user) ? true : false;
     }
 }

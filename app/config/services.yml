@@ -4,15 +4,11 @@ parameters:
     username_to_ignore: anonyme
 
 services:
-    user_finder:
-        class: AppBundle\Services\FindUser
-        arguments:
-            - "@security.token_storage"
-            - "@doctrine.orm.entity_manager"
-
     user_manager:
         class: AppBundle\Manager\UserManager
-        arguments: ['@service_container']
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@security.password_encoder"
 
     AppBundle\Controller\UserController:
         arguments:

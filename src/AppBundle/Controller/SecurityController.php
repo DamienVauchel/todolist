@@ -32,13 +32,6 @@ class SecurityController extends Controller
      */
     public function loginCheck()
     {
-        $user = $this->get('user_finder')->findUser();
-        $roles = $user->getRoles();
-
-        $authUser = $this->tokenStorage
-            ->getToken()
-            ->getUser();
-        $authUser->setRoles($roles);
     }
 
     /**
@@ -46,6 +39,5 @@ class SecurityController extends Controller
      */
     public function logoutCheck()
     {
-        // This code is never executed.
     }
 }
