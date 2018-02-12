@@ -11,6 +11,7 @@ class TaskControllerTest extends WebTestCase
     private $task;
     private $user;
     private $authUser;
+    private $anonUser;
 
     public function setUp()
     {
@@ -23,21 +24,18 @@ class TaskControllerTest extends WebTestCase
     public function addTestFixtures()
     {
         $this->user = new User();
-        $this->user->setUsername('testUser');
-        $this->user->setPassword('1234');
-        $this->user->setEmail('test@example.com');
-        $this->user->setRoles('ROLE_USER');
-
+        $this->user->hydrate('testUser', '1234', 'test@example.com', array('ROLE_USER'));
         $this->em->persist($this->user);
         $this->em->flush();
 
         $this->authUser = new User();
-        $this->authUser->setUsername('authUser');
-        $this->authUser->setPassword('1234');
-        $this->authUser->setEmail('auth@example.com');
-        $this->authUser->setRoles('ROLE_USER');
-
+        $this->authUser->hydrate('authUser', '1234', 'auth@example.com', array('ROLE_USER'));
         $this->em->persist($this->authUser);
+        $this->em->flush();
+
+        $this->anonUser = new User();
+        $this->anonUser->hydrate('anonyme', '1234', 'anonyme@test.com', array('ROLE_USER'));
+        $this->em->persist($this->anonUser);
         $this->em->flush();
 
         $this->task = new Task();

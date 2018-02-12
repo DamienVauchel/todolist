@@ -46,10 +46,7 @@ class WebTestCase extends BaseWebTestCase
         $firewallContext = 'main';
 
         $authUser = new User();
-        $authUser->setUsername('auth');
-        $authUser->setPassword('1234');
-        $authUser->setEmail('au@example.com');
-        $authUser->setRoles(array('ROLE_USER'));
+        $authUser->hydrate('auth', '1234', 'au@example.com', array('ROLE_USER'));
         $this->em->persist($authUser);
         $this->em->flush();
 

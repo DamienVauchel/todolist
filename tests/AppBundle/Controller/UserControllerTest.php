@@ -16,20 +16,12 @@ class UserControllerTest extends WebTestCase
     public function addTestFixtures()
     {
         $this->user1 = new User();
-        $this->user1->setUsername('testUser01');
-        $this->user1->setPassword('1234');
-        $this->user1->setEmail('test01@example.com');
-        $this->user1->setRoles('ROLE_USER');
-
+        $this->user1->hydrate('testUser01', '1234', 'test01@example.com', array('ROLE_USER'));
         $this->em->persist($this->user1);
         $this->em->flush();
 
         $this->user2 = new User();
-        $this->user2->setUsername('testUser02');
-        $this->user2->setPassword('1234');
-        $this->user2->setEmail('test02@example.com');
-        $this->user2->setRoles('ROLE_USER');
-
+        $this->user2->hydrate('testUser02', '1234', 'test02@example.com', array('ROLE_USER'));
         $this->em->persist($this->user2);
         $this->em->flush();
     }
