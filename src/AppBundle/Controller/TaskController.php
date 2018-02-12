@@ -24,8 +24,7 @@ class TaskController extends Controller
     public function createAction(Request $request)
     {
         $task = new Task();
-        $user = $this->get('user_finder')
-            ->findUser();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $task->setUser($user);
 
         $form = $this->createForm(TaskType::class, $task);
@@ -92,12 +91,12 @@ class TaskController extends Controller
     public function deleteTaskAction(Task $task)
     {
         $em = $this->getDoctrine()->getManager();
-        $authUser = $this->get('user_finder')->findUser();
-        $authUserRole = $authUser->getRoles();
-
         $taskUser = $task->getUser();
+
         if (!empty($taskUser)) {
             $taskUserUsername = $taskUser->getUsername();
+            $authUserUsername = $this->get('security.token_storage')->getToken()->getUsername();
+            $authUserRole = $this->get('security.token_storage')->getToken()->getRoles();
 
             if ($taskUserUsername == 'anonyme' && $authUserRole == array("ROLE_ADMIN")) {
                 $em->remove($task);
@@ -108,7 +107,7 @@ class TaskController extends Controller
                 return $this->redirectToRoute('task_list');
             }
 
-            if ($authUser == $taskUser) {
+            if ($authUserUsername == $taskUserUsername) {
                 $em->remove($task);
                 $em->flush();
 
