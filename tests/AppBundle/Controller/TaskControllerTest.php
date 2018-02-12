@@ -12,6 +12,11 @@ class TaskControllerTest extends WebTestCase
     private $user;
     private $authUser;
 
+    public function setUp()
+    {
+        parent::setUp();
+    }
+
     /**
      * Add example fixtures
      */
@@ -180,9 +185,8 @@ class TaskControllerTest extends WebTestCase
      */
     public function testCreateTask()
     {
-        $this->logInAsUser();
+        $this->logInUserObject();
         $crawler = $this->client->request('GET', '/tasks/create');
-
         $form = $crawler->selectButton('Ajouter')->form();
         $form['task[title]'] = 'Titre test';
         $form['task[content]'] = 'Contenu de test pour la création d\'une tâche';
@@ -218,5 +222,10 @@ class TaskControllerTest extends WebTestCase
 
         $this->assertEquals(200, $statusCode);
         $this->assertContains('Superbe! La tâche a bien été modifiée.', $crawler->filter('div.alert.alert-success')->text());
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
     }
 }

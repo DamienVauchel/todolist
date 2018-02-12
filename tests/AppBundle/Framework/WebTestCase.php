@@ -2,6 +2,7 @@
 
 namespace Tests\AppBundle\Framework;
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -33,6 +34,32 @@ class WebTestCase extends BaseWebTestCase
         {
             $schemaTool->createSchema($metadatas);
         }
+    }
+
+    /**
+     * Simulate a login as an User class user
+     */
+    protected function logInUserObject()
+    {
+        $session = $this->client->getContainer()->get('session');
+
+        $firewallContext = 'main';
+
+        $authUser = new User();
+        $authUser->setUsername('auth');
+        $authUser->setPassword('1234');
+        $authUser->setEmail('au@example.com');
+        $authUser->setRoles(array('ROLE_USER'));
+        $this->em->persist($authUser);
+        $this->em->flush();
+
+        $token = new UsernamePasswordToken($authUser, null, $firewallContext, $authUser->getRoles());
+        $session->set('_security_' . $firewallContext, serialize($token));
+        $session->save();
+
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $this->client->getCookieJar()->set($cookie);
+        $this->client->request('GET', '/');
     }
 
     /**
