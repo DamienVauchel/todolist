@@ -44,7 +44,29 @@ Finally you checkout a new branch called *hotfix/readme-update*.
 * *hotfix/* : for updates, fixes
 * *feature/* : for new feature
 
-When you did your work, don't forget to add an explicit commit.
+### PSR
+Please respect the PSR (PHP Standard Recomandations) for your code to be understandable and able to be updated by everybody.
+Reminder:
+* PSR-0 on the autoloader (now depreciated but used in the PSR-4)
+* PSR-1 on the bases of code standards
+* PSR-2 on the code style
+* PSR-4 on the autoloader
+
+For more informations, you can check the official [PSR documentation](https://www.php-fig.org/psr/)
+
+To check your code is clean, you can use the free code reviewer [Codacy](https://www.codacy.com/)
+
+### Symfony conventions
+Please respect the [Symfony conventions](https://symfony.com/doc/3.3/contributing/code/conventions.html)
+
+### Tests
+Please, test what you add with PHPUnit.
+
+For more informations, check the official [PHPUnit documentation](https://phpunit.de/).
+
+For more informations about PHPUnit in Symfony project, check the official [Symfony documentation](https://symfony.com/doc/3.3/testing.html).
+
+#### When you did your work, don't forget to add an explicit commit.
 
 ## Step 3 - Create the Pull-Request
 1. Push your branch on your forked repo
