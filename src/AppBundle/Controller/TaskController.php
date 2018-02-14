@@ -96,9 +96,8 @@ class TaskController extends Controller
         if (!empty($taskUser)) {
             $taskUserUsername = $taskUser->getUsername();
             $authUserUsername = $this->get('security.token_storage')->getToken()->getUsername();
-            $authUserRole = $this->get('security.token_storage')->getToken()->getRoles();
 
-            if ($taskUserUsername == 'anonyme' && $authUserRole == array("ROLE_ADMIN")) {
+            if ($taskUserUsername == 'anonyme' && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
                 $em->remove($task);
                 $em->flush();
 
